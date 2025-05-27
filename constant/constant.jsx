@@ -1,0 +1,1 @@
+export const BASE_URL_CALLBACK = 'https://projectmania-three.vercel.app'
