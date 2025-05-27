@@ -7,7 +7,7 @@ import { validateUserRegistration } from "../utils/validators.js";
 import { generateToken } from "../middleware/auth.js";
 import { generateVerificationCode } from "../utils/generateVerificationCod.js";
 import passport from 'passport';
-import { BASE_URL_CALLBACK } from "../constant/constant.jsx";
+import { BASE_URL_CALLBACK } from "../constant/constant.js";
 
 const findUserByIdentifier = async (identifier, options = {}) => {
   const normalizedIdentifier = identifier.trim().toLowerCase();
