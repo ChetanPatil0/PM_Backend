@@ -55,6 +55,6 @@ router.get('/search', auth, searchUsers);
 router.get('/stats', auth, checkRole([ROLES.ADMIN]), getUserStats);
 
 router.put('/profile-picture', auth, uploadProfilePicture, handleUploadError, updateProfilePicture);
-router.get('/profile-picture/:userId',  getProfilePictureById);
+router.get('/profile-picture/:userId', auth, getProfilePictureById);
 
 export default router;
