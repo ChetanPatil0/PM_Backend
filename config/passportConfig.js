@@ -5,6 +5,10 @@ import User from '../models/userModel.js';
 import { generateId } from '../utils/idGenerator.js';
 import { ROLE_PERMISSIONS, ROLES } from '../config/constants.js';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 // Helper function to parse full name into firstName, middleName, lastName
 const parseFullName = (fullName) => {
   if (!fullName || fullName.trim() === '') {
@@ -95,8 +99,8 @@ passport.deserializeUser(async (id, done) => {
 
 // GitHub Strategy
 passport.use(new GitHubStrategy({
-    clientID: 'Ov23liRNgjokG5DclEfw',
-    clientSecret: 'e1a5480620c48a0cf87eead75ed4c6212908e731',
+    clientID: process.env.GITHUB_CLIENT_ID || 'Ov23liRNgjokG5DclEfw',
+    clientSecret:process.env.GITHUB_CLIENT_SECRET || 'e1a5480620c48a0cf87eead75ed4c6212908e731',
     callbackURL: '/api/auth/github/callback',
     scope: ['user:email', 'user']
   },
