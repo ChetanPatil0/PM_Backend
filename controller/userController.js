@@ -825,16 +825,13 @@ export const getProfilePictureById = async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    if (!isValidObjectId(userId)) {
-      return res.status(400).json({ message: 'Invalid user ID' });
+    // Validate the userId format if needed (optional)
+    if (!userId || !userId.startsWith("USR-")) {
+      return res.status(400).json({ message: 'Invalid user ID format' });
     }
 
-    // Check if the requester is an admin or the user themselves
-    if (req.user.role !== ROLES.ADMIN && req.user.id !== userId) {
-      return res.status(403).json({ message: 'Unauthorized to access this profile picture' });
-    }
-
-    const user = await User.findById(userId).select('_id username profilePicture uploadedFiles');
+    // Query by the userId field (not _id)
+    const user = await User.findOne({ userId: userId }).select('_id userId firstName lastName profilePicture uploadedFiles');
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -847,8 +844,9 @@ export const getProfilePictureById = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      userId: user._id,
-      username: user.username,
+      userId: user.userId,
+      firstName: user.firstName,
+      lastName: user.lastName,
       profilePicture
     });
   } catch (error) {
