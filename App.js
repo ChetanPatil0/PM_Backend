@@ -385,7 +385,7 @@ app.use(express.json());
 app.use(express.urlencoded({ limit: '200mb', extended: true }));
 app.use(cors());
 app.use(session({
-  secret: 'your_session_secret', // Hardcoded; replace with a secure secret in production
+  secret: 'your_session_secret', 
   resave: false,
   saveUninitialized: false
 }));
