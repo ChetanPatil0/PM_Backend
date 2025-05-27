@@ -365,6 +365,8 @@ import { fileURLToPath } from 'url';
 import session from 'express-session';
 import passport from './config/passportConfig.js';
 import connectDB from './config/db.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Import routes
 import authRoutes from './routes/authRoutes.js';
@@ -373,7 +375,7 @@ import projectRoutes from './routes/projectRoutes.js';
 
 // Initialize app
 const app = express();
-const PORT = 5000; // Hardcoded port
+const PORT = process.env.PORT || 5000; 
 
 // Connect to database
 connectDB();
